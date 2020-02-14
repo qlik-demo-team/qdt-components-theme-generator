@@ -1,4 +1,8 @@
 @import "_variables";
 
+body {
+  padding: 0;
+  margin: 0;
+}
 // Fix for the spinning ball with bootstrap
 .qtd-preloader .qtd-preloader-ball2 { top: -40px; }

@@ -168,7 +168,7 @@ const App = () => {
               <Route exact path="/qdt-preloader-linear" component={QdtPreloaderLinear} />
               <Route exact path="/qdt-slider" component={QdtSlider} />
               <Route exact path="/colors" component={Colors} />
-              <Route exact path="/" component={Home} />
+              <Route exact path="/" component={QdtButton} />
               <Route component={Home} />
             </Switch>
           </Router>

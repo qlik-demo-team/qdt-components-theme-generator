@@ -54,6 +54,11 @@ const theme = {
         border: 5,
       },
     },
+    MuiListItemIcon: {
+      root: {
+        minWidth: 10,
+      },
+    },
     MuiSelect: {
       root: {
       },

@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, useTheme, withStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { Button, ButtonGroup } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -52,8 +52,6 @@ const SuccessButton = withStyles((theme) => ({
 
 const Container = () => {
   const classes = useStyles();
-  const theme = useTheme();
-  console.log(theme);
 
   return (
     <>

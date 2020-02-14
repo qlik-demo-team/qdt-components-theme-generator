@@ -4,7 +4,6 @@ import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
 
 function ThumbComponent(props) {
-  console.log(props);
   const { 'aria-valuenow': aria } = props;
   return (
     <div {...props}>

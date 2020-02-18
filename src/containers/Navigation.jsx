@@ -4,7 +4,7 @@ import {
   List, ListItem, ListItemIcon, ListItemText, Divider,
 } from '@material-ui/core';
 import {
-  Palette, StopOutlined, PlayArrow, ArrowDropDown, Autorenew, SpaceBar, Tune,
+  Palette, StopOutlined, PlayArrow, ArrowDropDown, Autorenew, SpaceBar, Tune, Search, Filter9Plus, Navigation, BarChart,
 } from '@material-ui/icons';
 
 const Container = ({ handleListItemClick, selectedIndex }) => (
@@ -45,8 +45,32 @@ const Container = ({ handleListItemClick, selectedIndex }) => (
       </ListItemIcon>
       <ListItemText primary="QdtSlider" />
     </ListItem>
+    <ListItem button component="a" href="#/qdt-search" selected={selectedIndex === 7} onClick={() => handleListItemClick(7)}>
+      <ListItemIcon>
+        <Search />
+      </ListItemIcon>
+      <ListItemText primary="QdtSearch" />
+    </ListItem>
+    <ListItem button component="a" href="#/qdt-kpi" selected={selectedIndex === 8} onClick={() => handleListItemClick(8)}>
+      <ListItemIcon>
+        <Filter9Plus />
+      </ListItemIcon>
+      <ListItemText primary="QdtKpi" />
+    </ListItem>
+    <ListItem button component="a" href="#/qdt-mapbox" selected={selectedIndex === 9} onClick={() => handleListItemClick(9)}>
+      <ListItemIcon>
+        <Navigation />
+      </ListItemIcon>
+      <ListItemText primary="QdtMapbox" />
+    </ListItem>
+    <ListItem button component="a" href="#/qdt-picasso" selected={selectedIndex === 10} onClick={() => handleListItemClick(10)}>
+      <ListItemIcon>
+        <BarChart />
+      </ListItemIcon>
+      <ListItemText primary="QdtPicasso" />
+    </ListItem>
     <Divider />
-    <ListItem button component="a" href="#/colors" selected={selectedIndex === 7} onClick={() => handleListItemClick(7)}>
+    <ListItem button component="a" href="#/colors" selected={selectedIndex === 11} onClick={() => handleListItemClick(11)}>
       <ListItemIcon>
         <Palette />
       </ListItemIcon>

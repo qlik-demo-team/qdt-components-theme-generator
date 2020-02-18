@@ -4,16 +4,14 @@ import {
   createMuiTheme, ThemeProvider, makeStyles, // useTheme,
 } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
+import {
+  Drawer, AppBar, Toolbar, CssBaseline, Typography, Divider, IconButton, Menu, MenuItem, Modal, SimpleModal,
+} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import BlurLinearIcon from '@material-ui/icons/BlurLinear';
+import GetAppIcon from '@material-ui/icons/GetApp';
 import Home from '../containers/Home';
 import Colors from '../containers/Colors';
 import QdtButton from '../containers/QdtButton';
@@ -22,16 +20,17 @@ import QdtSelect from '../containers/QdtSelect';
 import QdtPreloaderCircular from '../containers/QdtPreloaderCircular';
 import QdtPreloaderLinear from '../containers/QdtPreloaderLinear';
 import QdtSlider from '../containers/QdtSlider';
-import { Light } from '../themes/Themes';
+import { Dark } from '../themes/Themes';
 import Navigation from '../containers/Navigation';
 
-const theme = createMuiTheme(Light);
+const theme = createMuiTheme(Dark);
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((_theme) => ({
   root: {
     display: 'flex',
+    flexGrow: 1,
   },
   appBar: {
     zIndex: _theme.zIndex.drawer + 1,
@@ -49,7 +48,10 @@ const useStyles = makeStyles((_theme) => ({
     }),
   },
   menuButton: {
-    marginRight: 36,
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
   },
   hide: {
     display: 'none',
@@ -94,7 +96,17 @@ const App = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const openTheme = Boolean(anchorEl);
+  const [openModal, setOpenModal] = React.useState(false);
 
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -105,6 +117,14 @@ const App = () => {
 
   const handleListItemClick = (index) => {
     setSelectedIndex(index);
+  };
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   return (
@@ -130,9 +150,49 @@ const App = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
+            <Typography variant="h6" className={classes.title}>
               Qdt-components Theme Generator - Preview and Create themes for Qdt-components
             </Typography>
+
+            <div>
+              <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <BlurLinearIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={openTheme}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>Light</MenuItem>
+                <MenuItem onClick={handleClose}>Dark</MenuItem>
+              </Menu>
+              <IconButton
+                aria-label="Export Theme"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                color="inherit"
+                onClick={handleOpenModal}
+              >
+                <GetAppIcon />
+              </IconButton>
+            </div>
+
           </Toolbar>
         </AppBar>
         <Drawer
@@ -174,6 +234,20 @@ const App = () => {
           </Router>
         </main>
       </div>
+      <Modal
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+        open={openModal}
+        onClose={handleCloseModal}
+      >
+        <div>
+          <h2 id="simple-modal-title">Text in a modal</h2>
+          <p id="simple-modal-description">
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </p>
+          <SimpleModal />
+        </div>
+      </Modal>
     </ThemeProvider>
   );
 };

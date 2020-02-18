@@ -67,6 +67,11 @@ const theme = {
       root: {
       },
     },
+    MuiOutlinedInput: {
+      input: {
+        padding: '10px 14px',
+      },
+    },
     MuiMenuItem: {
       root: {
         '&$selected': {

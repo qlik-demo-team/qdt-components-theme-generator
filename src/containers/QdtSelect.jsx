@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  InputLabel, MenuItem, FormControl, Select, LinearProgress,
+  MenuItem, FormControl, Select, LinearProgress,
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -14,22 +14,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// const MenuItemQlik = withStyles((theme) => ({
-//   root: {
-//     color: theme.palette.error.contrastText,
-//     backgroundColor: theme.palette.error.main,
-//     '&:hover': {
-//       backgroundColor: theme.palette.error.dark,
-//     },
-//   },
-// }))(MenuItem);
-
 const Container = () => {
   const classes = useStyles();
-  const [age, setAge] = React.useState('');
+  const [year, setYear] = React.useState(2020);
+  const [month, setMonth] = React.useState('Jan');
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  const handleChangeYear = (event) => {
+    setYear(event.target.value);
+  };
+
+  const handleChangeMonth = (event) => {
+    setMonth(event.target.value);
   };
 
   return (
@@ -39,21 +34,41 @@ const Container = () => {
       <div className={classes.root}>
         <div>options: &#123; &#125;</div>
         <FormControl variant="outlined" className={classes.formControl}>
-          <InputLabel id="demo-simple-select-filled-label">Age</InputLabel>
+          {/* <InputLabel id="demo-simple-select-filled-label">Age</InputLabel> */}
           <Select
             labelId="demo-simple-select-filled-label"
             id="demo-simple-select-filled"
-            value={age}
-            onChange={handleChange}
+            displayEmpty
+            value={year}
+            onChange={handleChangeYear}
           >
-            <MenuItem value="">
-              <em>None</em>
+            <MenuItem value="" disabled>
+              Year
             </MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+            <MenuItem value={2020}>2020</MenuItem>
+            <MenuItem value={2019}>2019</MenuItem>
+            <MenuItem value={2018}>2018</MenuItem>
           </Select>
           <LinearProgress variant="determinate" value={80} />
+        </FormControl>
+        <div>options: &#123; color: &apos; secondary &apos; &#125;</div>
+        <FormControl variant="outlined" color="secondary" className={classes.formControl}>
+          {/* <InputLabel id="demo-simple-select-filled-label">Age</InputLabel> */}
+          <Select
+            labelId="demo-simple-select-filled-label"
+            id="demo-simple-select-filled"
+            displayEmpty
+            value={month}
+            onChange={handleChangeMonth}
+          >
+            <MenuItem value="" disabled>
+              Month
+            </MenuItem>
+            <MenuItem value="Jan">Jan</MenuItem>
+            <MenuItem value="Feb">Feb</MenuItem>
+            <MenuItem value="Mar">Mar</MenuItem>
+          </Select>
+          <LinearProgress variant="determinate" color="secondary" value={80} />
         </FormControl>
       </div>
     </>

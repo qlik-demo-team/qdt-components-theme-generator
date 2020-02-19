@@ -5,12 +5,11 @@ import {
 } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import {
-  Drawer, AppBar, Toolbar, CssBaseline, Typography, Divider, IconButton, Menu, MenuItem, Modal, SimpleModal,
+  Drawer, AppBar, Toolbar, CssBaseline, Typography, Divider, IconButton, Modal, SimpleModal, Switch as SwitchComponent,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import BlurLinearIcon from '@material-ui/icons/BlurLinear';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import Home from '../containers/Home';
 import Colors from '../containers/Colors';
@@ -20,10 +19,10 @@ import QdtSelect from '../containers/QdtSelect';
 import QdtPreloaderCircular from '../containers/QdtPreloaderCircular';
 import QdtPreloaderLinear from '../containers/QdtPreloaderLinear';
 import QdtSlider from '../containers/QdtSlider';
-import { Dark } from '../themes/Themes';
+import { Light as LightTheme, Dark as DarkTheme } from '../themes/Themes';
 import Navigation from '../containers/Navigation';
 
-const theme = createMuiTheme(Dark);
+// const theme = createMuiTheme(Dark);
 
 const drawerWidth = 240;
 
@@ -48,7 +47,7 @@ const useStyles = makeStyles((_theme) => ({
     }),
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: _theme.spacing(2),
   },
   title: {
     flexGrow: 1,
@@ -96,9 +95,9 @@ const App = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [selectedIndex, setSelectedIndex] = React.useState(1);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const openTheme = Boolean(anchorEl);
   const [openModal, setOpenModal] = React.useState(false);
+  const [checkedTheme, setCheckedTheme] = React.useState(false);
+  const [currentTheme, setCurrentTheme] = React.useState(createMuiTheme(LightTheme));
 
   const handleOpenModal = () => {
     setOpenModal(true);
@@ -119,21 +118,24 @@ const App = () => {
     setSelectedIndex(index);
   };
 
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleThemeToggle = () => {
+    if (checkedTheme) {
+      setCurrentTheme(createMuiTheme(LightTheme));
+      setCheckedTheme(false);
+    } else {
+      setCurrentTheme(createMuiTheme(DarkTheme));
+      setCheckedTheme(true);
+    }
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={currentTheme}>
 
       <div className={classes.root}>
         <CssBaseline />
         <AppBar
           position="fixed"
+          color="primary"
           className={clsx(classes.appBar, {
             [classes.appBarShift]: open,
           })}
@@ -155,33 +157,14 @@ const App = () => {
             </Typography>
 
             <div>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <BlurLinearIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={openTheme}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Light</MenuItem>
-                <MenuItem onClick={handleClose}>Dark</MenuItem>
-              </Menu>
+              Light
+              <SwitchComponent
+                checked={checkedTheme}
+                onChange={handleThemeToggle}
+                color="secondary"
+                inputProps={{ 'aria-label': 'Select Theme' }}
+              />
+              Dark
               <IconButton
                 aria-label="Export Theme"
                 aria-controls="menu-appbar"
@@ -210,7 +193,7 @@ const App = () => {
         >
           <div className={classes.toolbar}>
             <IconButton onClick={handleDrawerClose}>
-              {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+              {currentTheme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
             </IconButton>
           </div>
           <Divider />

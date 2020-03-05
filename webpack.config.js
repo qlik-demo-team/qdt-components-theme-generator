@@ -32,15 +32,15 @@ module.exports = {
           },
         ],
       },
-      {
-        test: /\.(scss)$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'resolve-url-loader',
-          'sass-loader',
-        ],
-      },
+      // {
+      //   test: /\.(scss)$/,
+      //   use: [
+      //     'style-loader',
+      //     'css-loader',
+      //     'resolve-url-loader',
+      //     'sass-loader',
+      //   ],
+      // },
       {
         test: /\.(eot|otf|png|jpg|svg|ttf|woff|woff2)$/i,
         loader: 'file-loader',

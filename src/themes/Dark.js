@@ -112,6 +112,78 @@ const theme = {
         border: 5,
       },
     },
+    MuiListItem: {
+      root: {
+        // textAlign: 'right',
+        borderBottom: `1px solid ${Colors.GREY_30}`,
+      },
+    },
+    MuiMenuItem: {
+      root: {
+        borderBottom: `1px solid ${Colors.GREY_80}`,
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        display: 'block',
+        fontSize: 12,
+        '&.selected': {
+          backgroundColor: Colors.QLIK_GREEN,
+          color: '#FFF',
+          borderBottom: `1px solid ${Colors.GREY_100}`,
+          '&:hover': {
+            backgroundColor: Colors.QLIK_GREEN,
+          },
+        },
+        '&.excluded': {
+          backgroundColor: Colors.GREY_80,
+          color: '#000',
+          borderBottom: `1px solid ${Colors.GREY_100}`,
+          '&:hover': {
+            color: '#FFF',
+            backgroundColor: Colors.QLIK_GREEN,
+          },
+        },
+      },
+    },
+    MuiSlider: {
+      root: {
+        height: 8,
+        // color: '#ffffff',
+      },
+      thumb: {
+        height: 24,
+        width: 'auto',
+        padding: 5,
+        borderRadius: 0,
+        // backgroundColor: 'currentColor',
+        backgroundColor: '#fff',
+        border: '2px solid currentColor',
+        marginTop: -10,
+        marginLeft: -12,
+        '&:focus,&:hover,&$active': {
+          boxShadow: 'inherit',
+        },
+        '& .bar': {
+          height: 10,
+          width: 1,
+          opacity: 0.5,
+          marginLeft: 1,
+          marginRight: 1,
+        },
+      },
+      active: {},
+      valueLabel: {
+        left: 'calc(-50% + 4px)',
+      },
+      track: {
+        height: 5,
+        borderRadius: 0,
+      },
+      rail: {
+        height: 5,
+        borderRadius: 0,
+      },
+    },
   },
 };
 

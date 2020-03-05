@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import {
-  Drawer, AppBar, Toolbar, CssBaseline, Typography, Divider, IconButton, Modal, SimpleModal, Switch as SwitchComponent,
+  Drawer, AppBar, Toolbar, CssBaseline, Typography, Divider, IconButton, Switch as SwitchComponent,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -16,13 +16,13 @@ import Colors from '../containers/Colors';
 import QdtButton from '../containers/QdtButton';
 import QdtSequencer from '../containers/QdtSequencer';
 import QdtSelect from '../containers/QdtSelect';
+import QdtList from '../containers/QdtList';
 import QdtPreloaderCircular from '../containers/QdtPreloaderCircular';
 import QdtPreloaderLinear from '../containers/QdtPreloaderLinear';
 import QdtSlider from '../containers/QdtSlider';
+import QdtKpi from '../containers/QdtKpi';
 import { Light as LightTheme, Dark as DarkTheme } from '../themes/Themes';
 import Navigation from '../containers/Navigation';
-
-// const theme = createMuiTheme(Dark);
 
 const drawerWidth = 240;
 
@@ -89,23 +89,24 @@ const useStyles = makeStyles((_theme) => ({
     flexGrow: 1,
     padding: _theme.spacing(3),
   },
+  paper: {
+    position: 'absolute',
+    width: 400,
+    backgroundColor: _theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: _theme.shadows[5],
+    padding: _theme.spacing(2, 4, 3),
+  },
 }));
 
 const App = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [selectedIndex, setSelectedIndex] = React.useState(1);
-  const [openModal, setOpenModal] = React.useState(false);
   const [checkedTheme, setCheckedTheme] = React.useState(false);
   const [currentTheme, setCurrentTheme] = React.useState(createMuiTheme(LightTheme));
+  console.log(currentTheme);
 
-  const handleOpenModal = () => {
-    setOpenModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setOpenModal(false);
-  };
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -130,7 +131,6 @@ const App = () => {
 
   return (
     <ThemeProvider theme={currentTheme}>
-
       <div className={classes.root}>
         <CssBaseline />
         <AppBar
@@ -170,7 +170,7 @@ const App = () => {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 color="inherit"
-                onClick={handleOpenModal}
+                // onClick={handleOpenModal}
               >
                 <GetAppIcon />
               </IconButton>
@@ -201,15 +201,16 @@ const App = () => {
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-
           <Router>
             <Switch>
               <Route exact path="/qdt-button" component={QdtButton} />
               <Route exact path="/qdt-sequencer" component={QdtSequencer} />
               <Route exact path="/qdt-select" component={QdtSelect} />
+              <Route exact path="/qdt-list" component={QdtList} />
               <Route exact path="/qdt-preloader-circular" component={QdtPreloaderCircular} />
               <Route exact path="/qdt-preloader-linear" component={QdtPreloaderLinear} />
               <Route exact path="/qdt-slider" component={QdtSlider} />
+              <Route exact path="/qdt-kpi" component={QdtKpi} />
               <Route exact path="/colors" component={Colors} />
               <Route exact path="/" component={QdtButton} />
               <Route component={Home} />
@@ -217,20 +218,6 @@ const App = () => {
           </Router>
         </main>
       </div>
-      <Modal
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-        open={openModal}
-        onClose={handleCloseModal}
-      >
-        <div>
-          <h2 id="simple-modal-title">Text in a modal</h2>
-          <p id="simple-modal-description">
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </p>
-          <SimpleModal />
-        </div>
-      </Modal>
     </ThemeProvider>
   );
 };

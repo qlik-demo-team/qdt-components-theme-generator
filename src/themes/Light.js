@@ -49,15 +49,57 @@ const theme = {
         padding: '10px 14px',
       },
     },
+    MuiListItemText: {
+      primary: {
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        display: 'block',
+        fontSize: 12,
+      },
+    },
     MuiMenuItem: {
       root: {
-        '&$selected': {
+        borderBottom: `1px solid ${Colors.GREY_80}`,
+        '&.selected': {
           backgroundColor: Colors.QLIK_GREEN,
           color: '#FFF',
+          borderBottom: `1px solid ${Colors.GREY_100}`,
           '&:hover': {
             backgroundColor: Colors.QLIK_GREEN,
           },
+          '& .MuiListItemIcon-root': {
+            minWidth: 10,
+            '& .MuiSvgIcon-root': {
+              fill: '#FFF',
+              width: '0.5em',
+              height: '0.5em',
+            },
+          },
         },
+        '&.excluded': {
+          backgroundColor: Colors.GREY_80,
+          color: '#000',
+          borderBottom: `1px solid ${Colors.GREY_100}`,
+          '&:hover': {
+            color: '#FFF',
+            backgroundColor: Colors.QLIK_GREEN,
+          },
+        },
+      },
+    },
+    MuiList: {
+      root: {
+      },
+      padding: {
+        paddingTop: 0,
+        paddingBottom: 0,
+      },
+    },
+    MuiListItem: {
+      root: {
+        // textAlign: 'right',
+        borderBottom: `1px solid ${Colors.GREY_85}`,
       },
     },
     MuiSlider: {
